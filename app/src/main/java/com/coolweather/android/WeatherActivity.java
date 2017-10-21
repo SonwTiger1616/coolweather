@@ -220,8 +220,10 @@ public class WeatherActivity extends AppCompatActivity {
             minText.setText(forecast.temperature.min);
             forecastLayout.addView(view);
         }
-        aqiText.setText(weather.aqi.city.aqi);
-        pm25Text.setText(weather.aqi.city.pm25);
+        if (weather.aqi != null){
+            aqiText.setText(weather.aqi.city.aqi);
+            pm25Text.setText(weather.aqi.city.pm25);
+        }
         comfortText.setText("舒适度：" + weather.suggestion.comfort.info);
         carwashText.setText("洗车指数：" + weather.suggestion.carWash.info);
         sportText.setText("运动建议：" + weather.suggestion.sport.info);
