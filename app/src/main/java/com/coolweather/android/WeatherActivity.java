@@ -65,6 +65,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     private ImageView bingPicImg;
 
+    private String weatherId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +94,6 @@ public class WeatherActivity extends AppCompatActivity {
         sportText = (TextView) findViewById(R.id.sport_text);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         final String weatherString = sharedPreferences.getString("weather", null);
-        final String weatherId;
         if (weatherString != null) {
             // 有缓存直接解析天气数据
             Weather weather = Utility.handlerWeatherResponse(weatherString);
@@ -131,6 +132,7 @@ public class WeatherActivity extends AppCompatActivity {
      * @param weatherId
      */
     public void requestWeather(String weatherId) {
+        this.weatherId = weatherId;
         // https://free-api.heweather.com/v5/weather?city=yourcity&key=yourkey
         String url = "https://free-api.heweather.com/v5/weather?city=" + weatherId + "&key=896227a495ec4e319edc31b7b8876db5";
         HttpUtil.sendOkHttpRequest(url, new Callback() {
